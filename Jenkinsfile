@@ -1,10 +1,5 @@
 pipeline {
     agent any
-	environment {
-	    registry = “nilaybose/mkubedemo”
-	    registryCredential = ‘gitdocker’
-  	}
-
     stages {
         stage('Build') {
             steps {
@@ -16,7 +11,7 @@ pipeline {
             steps {
             	script {
                 	docker.build "nilaybose/mkubedemo:latest"
-       	            docker.withRegistry( ‘’, registryCredential ) {
+       	            docker.withRegistry( ‘’, 'gitdocker' ) {
         				dockerImage.push()
       				}
                 }
