@@ -1,10 +1,9 @@
 pipeline {
     agent any
-	def app 
-    environment {
-        DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'sqlite'
-    }
+	environment {
+	    registry = “nilaybose/mkubedemo”
+	    registryCredential = ‘gitdocker’
+  	}
 
     stages {
         stage('Build') {
@@ -15,8 +14,13 @@ pipeline {
         }
         stage('Docker') {
             steps {
-                app = docker.build("nilaybose/mkubedemo")
-                app.push('latest')
+            	script {
+                	docker.build "nilaybose/mkubedemo:latest"
+       	            docker.withRegistry( ‘’, registryCredential ) {
+        				dockerImage.push()
+      				}
+                }
+            
             }
         }
     }
