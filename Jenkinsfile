@@ -10,7 +10,7 @@ pipeline {
         stage('Docker') {
             steps {
             	script {
-                	docker.build "nilaybose/mkubedemo:latest"
+                	dockerImage = docker.build "nilaybose/mkubedemo:latest"
        	            docker.withRegistry( ‘docker.io/nilaybose’, 'gitdocker' ) {
         				dockerImage.push()
       				}
