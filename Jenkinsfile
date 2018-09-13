@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'printenv'
+                sh './gradlew build &&  java -jar ./build/libs/nbose-minikube-demo-0.1.0.jar'
             }
         }
     }
