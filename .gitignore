@@ -3,3 +3,4 @@ output/
 .gradle/
 .project
 .settings/
+build/
