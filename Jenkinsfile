@@ -11,7 +11,7 @@ pipeline {
             steps {
             	script {
                 	dockerImage = docker.build "nilaybose/mkubedemo:latest"
-       	            docker.withRegistry( "docker.io/nilaybose", "gitdocker") {
+       	            docker.withRegistry( "https://docker.io/nilaybose", "gitdocker") {
         				dockerImage.push()
       				}
                 }
