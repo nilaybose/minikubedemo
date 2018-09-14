@@ -10,13 +10,12 @@ pipeline {
         stage('Docker') {
             steps {
             	script {
-                	dockerImage = docker.build "nilaybose/mkubedemo:latest"
-       	            docker.withRegistry( "https://docker.io/nilaybose", "gitdocker") {
-        				dockerImage.push()
+                	docker.build "nilaybose/mkubedemo:latest"
+      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
+      					 sh 'docker push nilaybose/mkubedemo:latest'
       				}
                 }
-            
-            }
+           }
         }
     }
 }
