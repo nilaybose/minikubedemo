@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew build'
                 sh 'echo $PWD'
+                sh './gradlew build'
             }
         }
         stage('Docker') {
