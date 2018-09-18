@@ -1,6 +1,7 @@
 package nbose.edu.sbmkdemo;
 
 import java.net.InetAddress;
+import java.time.LocalDateTime;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,18 +13,22 @@ public class WelcomeController {
     public String index() {
         return new Gson().toJson(new ResponseVO(), ResponseVO.class) ;
     }
+
 }
 
 class ResponseVO{
-	private String msg = "Greetings from Spring Boot Running Inside Docker in Minikube Pod !!" ;
+	private String msg ; 
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
+	private String color = "#33B8FF" ; //blue
+	//private String color = "#80FF33" ; //green
 	
 	ResponseVO(){
 		try { 
 			hostname = InetAddress.getLocalHost().getHostName();
 			hostip   = InetAddress.getLocalHost().getHostAddress();
+			msg = "Greetings (V1) from Spring Boot Running Inside Docker in Minikube Pod !!<br/>" + LocalDateTime.now() ;
 		}
 		catch(Exception _ignore) {
 		}
@@ -43,5 +48,9 @@ class ResponseVO{
 
 	public String getHostip() {
 		return hostip;
+	}
+
+	public String getColor() {
+		return color ;
 	}
 }
