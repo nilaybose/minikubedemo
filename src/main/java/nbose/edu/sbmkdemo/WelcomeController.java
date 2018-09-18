@@ -29,9 +29,10 @@ class ResponseVO{
 	
 	ResponseVO(){
 		try { 
+			Thread.sleep(4000L) ;
 			hostname = InetAddress.getLocalHost().getHostName();
 			hostip   = InetAddress.getLocalHost().getHostAddress();
-			msg = "Greetings " + version + " from Spring Boot Running Inside Docker in Minikube Pod !!<br/>" + LocalDateTime.now() ;
+			msg = "Greetings " + version + " from Spring Boot Running Inside Docker in Minikube Pod !! [" + LocalDateTime.now() + "]";
 		}
 		catch(Exception _ignore) {
 		}
