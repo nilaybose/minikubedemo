@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			produrl="http://192.168.39.156:32680/app/" ;
+			preprodurl="http://192.168.39.156:32680/app/" ;
+			
+			$(document).ready(function(){
+				 $("#prod_url").text("Production URL : " + produrl);
+				 $("#pre_prod_url").text("Pre Prod URL - " + preprodurl);
+				 dashboard() ;
+			});
+			
+			function dashboard(){
+				$("#al").css("display", "block");
+				for(i=1; i <=3; i++){
+					refreshProd(i);
+					refreshPreProd(i) ;
+				}
+				setTimeout(dashboard,10000) ;
+			}
+			
+			function refreshProd(id){
+				$.ajax({
+				    type: "post", url: produrl  + '?t=' + new Date(), id: id,
+				    success: function (data, text) {
+				    	$("#div_prod_p_" + id).text(data.hostname) ;
+				    	$("#div_prod_m_" + id).text(data.msg) ;
+				    	$("#div_prod_c_" + id).text(data.version) ;
+				    	$("#div_prod_c_" + id).css("backgroundColor" ,data.color) ;
+				    	if( id==3){
+				    		$("#al").css("display", "none");
+				    	}
+				    },
+				    error: function (request, status, error) {
+				    	$("#div_prod_p_" + id).text("error") ;
+				    	$("#div_prod_m_" + id).text("error") ;
+				    	$("#div_prod_c_" + id).text("") ;
+				    	$("#div_prod_c_" + id).css("backgroundColor" ,"red") ;
+				    	if( id==3){
+				    		$("#al").css("display", "none");
+				    	}
+				    }
+				});
+			}
+			
+			function refreshPreProd(id){
+				$.ajax({
+				    type: "post", url: preprodurl  + '?t=' + new Date(), id: id,
+				    success: function (data, text) {
+				    	$("#div_pprod_p_" + id).text(data.hostname) ;
+				    	$("#div_pprod_m_" + id).text(data.msg) ;
+				    	$("#div_pprod_c_" + id).text(data.version) ;
+				    	$("#div_pprod_c_" + id).css("backgroundColor" ,data.color) ;
+				    },
+				    error: function (request, status, error) {
+				    	$("#div_pprod_p_" + id).text("error") ;
+				    	$("#div_pprod_m_" + id).text("error") ;
+				    	$("#div_pprod_c_" + id).text("") ;
+				    	$("#div_pprod_c_" + id).css("backgroundColor" ,"red") ;
+				    }
+				});
+			}
+			
+		</script>
+		
+		<style type="text/css">
+			.tg  {border-collapse:collapse;border-spacing:0;}
+			.tg td{font-family:Arial, sans-serif;font-size:14px;text-align: left;vertical-align:middle;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+			.tg th{font-family:Arial, sans-serif;background-color: #FF9C33;font-size:18px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+			.tg .tg-s268{text-align:left}
+		</style>
+	</head>
+	
+	<body style="background-color: #F9EBEA;">
+		<table style="width:75%;">
+		  <tr>
+		    <td class='tg' style="width:100%;font-size:30px;text-align: center;">Kubernetes Application Dashboard</td>
+		    <td></td>
+		  </tr>
+		</table>
+		<br/>
+			<div style='font-size:15px' id='prod_url'></div>
+		<br/>
+		<table style="width:75%" class="tg" border='1'>
+		  <tr>
+		  	<th class="tg-s268" >App Version</th>
+		    <th class="tg-s268" >Message</th>
+		    <th class="tg-s268" >POD Host</th> 
+		    <th class="tg-s268" >Clients</th> 
+		  </tr>
+		  <tr>
+		    <td><div id="div_prod_c_1" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_prod_m_1">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_p_1">Pod 1</div></td>
+		    <td>Client 1</td>
+		  </tr>
+		  <tr>
+		    <td><div id="div_prod_c_2" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_prod_m_2">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_p_2">Pod 2</div></td>
+		    <td>Client 2</td>
+		  </tr>
+		  <tr>
+		    <td><div id="div_prod_c_3" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_prod_m_3">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_p_3">Pod 3</div></td>
+		    <td>Client 3</td>
+		  </tr>
+		</table>
+		
+		<br/>
+		<br/>
+			<div style='font-size:15px' id='pre_prod_url'>*&nbsp;Pre Prod URL</div>
+		<br/>
+		<table style="width:75%" class="tg" border='1'>
+		  <tr>
+		  	<th class="tg-s268" >App Version</th>
+		    <th class="tg-s268" >Message</th>
+		    <th class="tg-s268" >POD Host</th> 
+		    <th class="tg-s268" >Clients</th> 
+		  </tr>
+		  <tr>
+		    <td><div id="div_pprod_c_1" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_pprod_m_1">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_p_1">Pod 1</div></td>
+		    <td>Client 1</td>
+		  </tr>
+		  <tr>
+		    <td><div id="div_pprod_c_2" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_pprod_m_2">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_p_2">Pod 2</div></td>
+		    <td>Client 2</td>
+		  </tr>
+		  <tr>
+		    <td><div id="div_pprod_c_3" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
+		    <td><div id="div_pprod_m_3">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_p_3">Pod 3</div></td>
+		    <td>Client 3</td>
+		  </tr>
+		</table>
+		<table  style="width:50%;">
+		  <tr>
+		    <td colspan=2 width=100% ><div id='al'><img style='width:80px;height:80px;' src='./giphy.gif'/></div></td>
+		  </tr>
+		</table>
+		
+	</body>
+</html>

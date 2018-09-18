@@ -1,0 +1,17 @@
+kubectl --context=minikube --namespace=kube-system get svc kubernetes-dashboard -o json
+kubectl describe node minikube
+
+Deployment
+kubectl run spboot --image=nilaybose/mkubedemo --port=9080 --generator=run/v1
+kubectl get rc
+kubectl get po
+kubectl expose rc spboot --type=LoadBalancer --name spboot-http
+kubectl get svc
+
+
+minikube dashboard --url
+minikube service spboot-http --url
+
+kubectl delete po spboot-9lgnv
+kubectl scale rc spboot --replicas=3
+
