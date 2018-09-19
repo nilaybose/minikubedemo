@@ -24,6 +24,8 @@ kubectl label svc prod-spboot-service app=spboot-v2 --overwrite
 
 kubectl patch svc prod-spboot-service -p '{"spec":{"selector": {"app": "spboot-v2"}}}'
 
+kubectl delete deployment spboot-v1
+
 ================================== ARCHIVE =======================
 kubectl --context=minikube --namespace=kube-system get svc kubernetes-dashboard -o json
 kubectl describe node minikube
