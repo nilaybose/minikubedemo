@@ -12,10 +12,6 @@ spec:
     spec:
       containers:
       - name: spboot-container
-        image: nilaybose/mkubedemo:latest
+        image: nilaybose/mkubedemo
         ports:
         - containerPort: 9080
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 9080
