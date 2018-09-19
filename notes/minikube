@@ -1,3 +1,30 @@
+------------------------ Deployment ------------------
+
+minikube dashboard --url
+
+kubectl create -f prod-spboot-service.yaml 
+
+minikube service prod-spboot-service --url
+
+kubectl create -f preprod-spboot-service.yaml 
+
+minikube service preprod-spboot-service --url
+
+kubectl create -f v1_deploy.yaml --record
+
+kubectl rollout status deployment spboot-v1
+
+kubectl get pods -o wide 
+
+kubectl get po --show-labels -o wide
+
+kubectl scale deployment spboot-v1 --replicas=3
+
+kubectl label svc prod-spboot-service app=spboot-v2 --overwrite
+
+kubectl patch svc prod-spboot-service -p '{"spec":{"selector": {"app": "spboot-v2"}}}'
+
+================================== ARCHIVE =======================
 kubectl --context=minikube --namespace=kube-system get svc kubernetes-dashboard -o json
 kubectl describe node minikube
 
@@ -14,21 +41,4 @@ minikube service spboot-http --url
 
 kubectl delete po spboot-9lgnv
 kubectl scale rc spboot --replicas=3
-
-
------------------------- Deployment ------------------
-
-minikube dashboard --url
-kubectl create -f v1_deploy.yaml --record
-kubectl rollout status deployment spboot-v1
-
-kubectl create -f prod-spboot-service.yaml 
-minikube service prod-spboot-service --url
-
-kubectl create -f preprod-spboot-service.yaml 
-minikube service preprod-spboot-service --url
-
-kubectl get pods -o wide 
-kubectl scale deployment spboot --replicas=3
-
 
