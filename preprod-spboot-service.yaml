@@ -1,16 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: spboot-preprod-service
+  name: preprod-spboot-service
   labels:
-    app: spboot
-    role: spboot-v1
+    app: spboot-v2
     env: prod
 spec:
   type: LoadBalancer
   selector:
-    app: spboot
-    role: spboot-v1
+    app: spboot-v2
   ports:
     - port: 80
       targetPort: 9080

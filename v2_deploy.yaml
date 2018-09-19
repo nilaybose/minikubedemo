@@ -1,14 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spboot
+  name: spboot-v2
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-        app: spboot
-        role: spboot-v2
+        app: spboot-v2
     spec:
       containers:
       - name: spboot-container

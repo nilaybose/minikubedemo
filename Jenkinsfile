@@ -17,5 +17,12 @@ pipeline {
                 }
            }
         }
+        stage('Deploy') {
+            steps {
+                sh 'kubectl create -f ./v2_deploy.yaml --record'
+            }
+        }
     }
 }
+
+

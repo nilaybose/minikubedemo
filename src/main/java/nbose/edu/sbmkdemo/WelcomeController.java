@@ -20,12 +20,12 @@ public class WelcomeController {
 
 class ResponseVO{
 	private String msg ; 
-	private String version = "(V2)"; 
+	private String version = "(V1)"; 
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
-	//private String color = "#33B8FF" ; //blue
-	private String color = "#80FF33" ; //green
+	private String color = "#33B8FF" ; //blue
+	//private String color = "#80FF33" ; //green
 	
 	ResponseVO(){
 		try { 

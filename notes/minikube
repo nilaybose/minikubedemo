@@ -17,13 +17,16 @@ kubectl scale rc spboot --replicas=3
 
 
 ------------------------ Deployment ------------------
-kubectl create -f v1_deploy.yaml --record
-kubectl rollout status deployment spboot
 
-kubectl create -f prod_service.yaml --record
-minikube service spboot-service --url
-kubectl create -f pre_prod_service.yaml --record
-minikube service spboot-preprod-service --url
+minikube dashboard --url
+kubectl create -f v1_deploy.yaml --record
+kubectl rollout status deployment spboot-v1
+
+kubectl create -f prod-spboot-service.yaml 
+minikube service prod-spboot-service --url
+
+kubectl create -f preprod-spboot-service.yaml 
+minikube service preprod-spboot-service --url
 
 kubectl get pods -o wide 
 kubectl scale deployment spboot --replicas=3
