@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spboot
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: spboot
+        role: spboot-v2
+    spec:
+      containers:
+      - name: spboot-container
+        image: nilaybose/mkubedemo
+        ports:
+        - containerPort: 9080
