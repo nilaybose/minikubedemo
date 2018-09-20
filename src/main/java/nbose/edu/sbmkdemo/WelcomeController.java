@@ -14,7 +14,9 @@ public class WelcomeController {
     @RequestMapping( value="/app", produces = "application/json")
     public String index(HttpServletResponse  response) {
     	response.setHeader("Access-Control-Allow-Origin", "*");
-        return new Gson().toJson(new ResponseVO(), ResponseVO.class) ;
+    	String json = new Gson().toJson(new ResponseVO(), ResponseVO.class) ;
+    	System.out.println(json);
+        return json ;
     }
 }
 
