@@ -4,7 +4,7 @@ metadata:
   name: spboot-v1
 spec:
   replicas: 3
-  template:
+  template: 
     metadata:
       labels:
         app: spboot-v1
@@ -12,5 +12,12 @@ spec:
       containers:
       - name: spboot-container
         image: nilaybose/mkubedemo
+        volumeMounts:
+        - name: sblogs
+          mountPath: /tmp/sblogs
         ports:
         - containerPort: 9080
+      volumes:
+      - name: sblogs
+        emptyDir: {}
+
