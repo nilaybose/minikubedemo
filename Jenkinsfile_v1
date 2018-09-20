@@ -17,7 +17,7 @@ pipeline {
                 }
            }
         }
-        stage('Deploy Green') {
+        stage('Deploy V1') {
             steps {
                 sh 'kubectl create -f ./v1_deploy.yaml --record'
             }

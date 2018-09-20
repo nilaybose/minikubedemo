@@ -17,7 +17,7 @@ pipeline {
                 }
            }
         }
-        stage('Deploy Green') {
+        stage('Deploy V2') {
             steps {
                 sh 'kubectl create -f ./v2_deploy.yaml --record'
                 sh 'sleep 3m'
@@ -30,7 +30,7 @@ pipeline {
                 sh 'echo "Testing of the new service Successful"'
             }
         }
-        stage('Blue2Green') {
+        stage('V1_TO_V2') {
             steps {
             	sh 'kubectl label svc prod-spboot-service app=spboot-v2 --overwrite'
             	sh 'kubectl patch svc prod-spboot-service -p \'{"spec":{"selector": {"app": "spboot-v2"}}}\''
