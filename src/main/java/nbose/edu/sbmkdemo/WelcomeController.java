@@ -31,8 +31,8 @@ class ResponseVO{
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
-	private String color = "#33B8FF" ; //blue
-	//private String color = "#80FF33" ; //green
+	private String color = "blue" ; //blue
+	//private String color = "green" ; //green
 	
 	ResponseVO(){
 		try { 
