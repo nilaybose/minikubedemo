@@ -5,17 +5,22 @@ import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson ;
 
 @RestController
 public class WelcomeController {
+	Logger logger = LoggerFactory.getLogger(WelcomeController.class);
+	
     @RequestMapping( value="/app", produces = "application/json")
     public String index(HttpServletResponse  response) {
     	response.setHeader("Access-Control-Allow-Origin", "*");
     	String json = new Gson().toJson(new ResponseVO(), ResponseVO.class) ;
     	System.out.println(json);
+    	logger.info(json);
         return json ;
     }
 }
