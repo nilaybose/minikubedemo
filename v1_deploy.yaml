@@ -19,5 +19,6 @@ spec:
         - containerPort: 9080
       volumes:
       - name: sblogs
-        emptyDir: {}
+        hostPath: 
+         path: /tmp/sblogs
 
