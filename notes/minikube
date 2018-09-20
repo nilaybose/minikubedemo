@@ -26,6 +26,8 @@ kubectl patch svc prod-spboot-service -p '{"spec":{"selector": {"app": "spboot-v
 
 kubectl delete deployment spboot-v1
 
+kubectl exec -it  spboot-v1-57d5fcff65-2s827 bash
+
 ================================== ARCHIVE =======================
 kubectl --context=minikube --namespace=kube-system get svc kubernetes-dashboard -o json
 kubectl describe node minikube
