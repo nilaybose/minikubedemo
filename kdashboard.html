@@ -3,12 +3,21 @@
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script>
-			produrl="http://192.168.39.156:32680/app/" ;
-			preprodurl="http://192.168.39.156:32680/app/" ;
+			var produrl="" ;
+			var preprodurl="" ;
 			
 			$(document).ready(function(){
-				 $("#prod_url").text("Production URL : " + produrl);
-				 $("#pre_prod_url").text("Pre Prod URL - " + preprodurl);
+			 	$("#button1").click( function()
+			           {
+				            produrl = $('#produrl').val() ;
+			           }
+				 );
+				 $("#button2").click( function()
+			           {
+					 		preprodurl = $('#preurl').val();
+			           }
+				 );
+				 
 				 dashboard() ;
 			});
 			
@@ -28,6 +37,7 @@
 				    	$("#div_prod_p_" + id).text(data.hostname) ;
 				    	$("#div_prod_m_" + id).text(data.msg) ;
 				    	$("#div_prod_c_" + id).text(data.version) ;
+				    	$("#div_prod_t_" + id).text(data.traceid) ;
 				    	$("#div_prod_c_" + id).css("backgroundColor" ,data.color) ;
 				    	if( id==3){
 				    		$("#al").css("display", "none");
@@ -37,6 +47,7 @@
 				    	$("#div_prod_p_" + id).text("error") ;
 				    	$("#div_prod_m_" + id).text("error") ;
 				    	$("#div_prod_c_" + id).text("") ;
+				    	$("#div_prod_t_" + id).text("") ;
 				    	$("#div_prod_c_" + id).css("backgroundColor" ,"red") ;
 				    	if( id==3){
 				    		$("#al").css("display", "none");
@@ -52,12 +63,14 @@
 				    	$("#div_pprod_p_" + id).text(data.hostname) ;
 				    	$("#div_pprod_m_" + id).text(data.msg) ;
 				    	$("#div_pprod_c_" + id).text(data.version) ;
+				    	$("#div_pprod_t_" + id).text(data.traceid) ;
 				    	$("#div_pprod_c_" + id).css("backgroundColor" ,data.color) ;
 				    },
 				    error: function (request, status, error) {
 				    	$("#div_pprod_p_" + id).text("error") ;
 				    	$("#div_pprod_m_" + id).text("error") ;
 				    	$("#div_pprod_c_" + id).text("") ;
+				    	$("#div_pprod_t_" + id).text("") ;
 				    	$("#div_pprod_c_" + id).css("backgroundColor" ,"red") ;
 				    }
 				});
@@ -81,62 +94,80 @@
 		  </tr>
 		</table>
 		<br/>
-			<div style='font-size:15px' id='prod_url'></div>
+			<table style="width:75%;">
+			  <tr>
+			    <td><input id='produrl' type='text' size='100' value='http://192.168.39.245'/></td>
+			    <td align="left"><button id='button1' type="button">Add Production URL</button></td>
+			  </tr>
+			</table>
 		<br/>
 		<table style="width:75%" class="tg" border='1'>
 		  <tr>
 		  	<th class="tg-s268" >App Version</th>
 		    <th class="tg-s268" >Message</th>
 		    <th class="tg-s268" >POD Host</th> 
+		    <th class="tg-s268" >Trace ID</th> 
 		    <th class="tg-s268" >Clients</th> 
 		  </tr>
 		  <tr>
-		    <td><div id="div_prod_c_1" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_prod_m_1">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_c_1" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_prod_m_1"></div></td>
 		    <td><div id="div_prod_p_1">Pod 1</div></td>
+		    <td><div id="div_prod_t_1"></div></td>
 		    <td>Client 1</td>
 		  </tr>
 		  <tr>
-		    <td><div id="div_prod_c_2" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_prod_m_2">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_c_2" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_prod_m_2"></div></td>
 		    <td><div id="div_prod_p_2">Pod 2</div></td>
+		    <td><div id="div_prod_t_2"></div></td>
 		    <td>Client 2</td>
 		  </tr>
 		  <tr>
-		    <td><div id="div_prod_c_3" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_prod_m_3">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_prod_c_3" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_prod_m_3"></div></td>
 		    <td><div id="div_prod_p_3">Pod 3</div></td>
+		    <td><div id="div_prod_t_3"></div></td>
 		    <td>Client 3</td>
 		  </tr>
 		</table>
 		
 		<br/>
 		<br/>
-			<div style='font-size:15px' id='pre_prod_url'>*&nbsp;Pre Prod URL</div>
+			<table style="width:75%;">
+			  <tr>
+			    <td><input id='preurl' type='text' size='100' value='http://192.168.39.245'/></td>
+			    <td align="left"><button id='button2' type="button">Add PRE Production URL</button></td>
+			  </tr>
+			</table>
 		<br/>
 		<table style="width:75%" class="tg" border='1'>
 		  <tr>
 		  	<th class="tg-s268" >App Version</th>
 		    <th class="tg-s268" >Message</th>
 		    <th class="tg-s268" >POD Host</th> 
+		    <th class="tg-s268" >Trace ID</th> 
 		    <th class="tg-s268" >Clients</th> 
 		  </tr>
 		  <tr>
-		    <td><div id="div_pprod_c_1" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_pprod_m_1">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_c_1" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_pprod_m_1"></div></td>
 		    <td><div id="div_pprod_p_1">Pod 1</div></td>
+		     <td><div id="div_pprod_t_1"></div></td>
 		    <td>Client 1</td>
 		  </tr>
 		  <tr>
-		    <td><div id="div_pprod_c_2" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_pprod_m_2">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_c_2" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_pprod_m_2"></div></td>
 		    <td><div id="div_pprod_p_2">Pod 2</div></td>
+		    <td><div id="div_pprod_t_2"></div></td>
 		    <td>Client 2</td>
 		  </tr>
 		  <tr>
-		    <td><div id="div_pprod_c_3" style="width:100%;height:30px;background-color:#33B8FF;">v1</div></td>
-		    <td><div id="div_pprod_m_3">Greetings (v1) from Spring Boot Running Inside Docker in Minikube Pod !!</div></td>
+		    <td><div id="div_pprod_c_3" style="width:100%;height:30px;">v1</div></td>
+		    <td><div id="div_pprod_m_3"></div></td>
 		    <td><div id="div_pprod_p_3">Pod 3</div></td>
+		    <td><div id="div_pprod_t_3"></div></td>
 		    <td>Client 3</td>
 		  </tr>
 		</table>
@@ -145,6 +176,5 @@
 		    <td colspan=2 width=100% ><div id='al'><img style='width:80px;height:80px;' src='./giphy.gif'/></div></td>
 		  </tr>
 		</table>
-		
 	</body>
 </html>
