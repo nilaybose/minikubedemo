@@ -26,7 +26,7 @@ pipeline {
         stage('ABTEST') {
             steps {
             	sh 'echo "Test the new service"'
-                sh 'curl http://192.168.39.245:32382/app/ | grep -i green'
+                sh 'curl http://192.168.39.93:32693/app/| grep -i green'
                 sh 'echo "Testing of the new service Successful"'
             }
         }
