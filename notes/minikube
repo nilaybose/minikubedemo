@@ -18,7 +18,7 @@ kubectl get pods -o wide
 
 kubectl get po --show-labels -o wide
 
-kubectl scale deployment spboot-v1 --replicas=3
+kubectl scale deployment spboot-v1 --replicas=5
 
 kubectl label svc prod-spboot-service app=spboot-v2 --overwrite
 
