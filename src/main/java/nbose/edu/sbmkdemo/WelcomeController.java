@@ -36,7 +36,7 @@ class ResponseVO{
 	
 	public String getCSV() {
 		return "'{\"event\":\"" + "version=" + version + ", hostname=" + hostname + ", color=" + color + ", msg=" + msg + ", hostip=" 
-				+ hostip + "\"}"" ;
+				+ hostip + "\"}'" ;
 	}
 	
 	ResponseVO(){
