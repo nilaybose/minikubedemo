@@ -18,9 +18,9 @@ public class WelcomeController {
     @RequestMapping( value="/app", produces = "application/json")
     public String index(HttpServletResponse  response) {
     	response.setHeader("Access-Control-Allow-Origin", "*");
-    	String json = new Gson().toJson(new ResponseVO(), ResponseVO.class) ;
-    	System.out.println(json);
-    	logger.info(json);
+    	ResponseVO resp = new ResponseVO() ;
+    	String json = new Gson().toJson(resp, ResponseVO.class) ;
+    	logger.info(resp.getCSV());
         return json ;
     }
 }
@@ -33,6 +33,11 @@ class ResponseVO{
 	private String hostip ;
 	private String color = "blue" ; //blue
 	//private String color = "green" ; //green
+	
+	public String getCSV() {
+		return "{\"event\":\"" + "version=" + version + ", hostname=" + hostname + ", color=" + color + ", msg=" + msg + ", hostip=" 
+				+ hostip + "\"}" ;
+	}
 	
 	ResponseVO(){
 		try { 
