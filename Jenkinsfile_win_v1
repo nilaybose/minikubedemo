@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                './gradlew.bat build'
+            }
+        }
+        stage('Docker') {
+            steps {
+            	script {
+                	docker.build "nilaybose/mkubedemo:latest"
+      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
+      					 sh 'docker push nilaybose/mkubedemo:latest'
+      				}
+                }
+           }
+        }
+        stage('Deploy V1') {
+            steps {
+                'kubectl create -f ./v1_deploy.yaml --record'
+            }
+        }
+    }
+}
+
+
