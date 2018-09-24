@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                './gradlew.bat build'
+                sh './gradlew.bat build'
             }
         }
         stage('Docker') {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deploy V1') {
             steps {
-                'kubectl create -f ./v1_deploy.yaml --record'
+                sh 'kubectl create -f ./v1_deploy.yaml --record'
             }
         }
     }
