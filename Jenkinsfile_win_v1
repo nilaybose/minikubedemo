@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew.bat build'
+                cmd './gradlew.bat build'
             }
         }
         stage('Docker') {
@@ -11,14 +11,14 @@ pipeline {
             	script {
                 	docker.build "nilaybose/mkubedemo:latest"
       				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
-      					 sh 'docker push nilaybose/mkubedemo:latest'
+      					 cmd 'docker push nilaybose/mkubedemo:latest'
       				}
                 }
            }
         }
         stage('Deploy V1') {
             steps {
-                sh 'kubectl create -f ./v1_deploy.yaml --record'
+                cmd 'kubectl create -f ./v1_deploy.yaml --record'
             }
         }
     }
