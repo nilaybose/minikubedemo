@@ -4,6 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin'
+                sh 'alias'
                 sh 'echo $PATH'
                 sh 'echo $PWD'
                 sh './gradlew build'
