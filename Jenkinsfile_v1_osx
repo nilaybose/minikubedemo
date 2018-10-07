@@ -3,14 +3,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'alias docker=/usr/local/bin/docker'
                 sh 'echo $PWD'
                 sh './gradlew build'
             }
         }
         stage('Docker') {
             steps {
-            	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'
-                sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+            	script {
+                	docker.build "nilaybose/mkubedemo:latest"
+      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
+      					 sh 'docker push nilaybose/mkubedemo:latest'
+      				}
+                }
            }
         }
         stage('Deploy V1') {
