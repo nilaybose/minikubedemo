@@ -12,9 +12,9 @@ pipeline {
             	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'
             	script {
       				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
-      					 sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
       				}
                 }
+                sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
            }
         }
         stage('Deploy V1') {
