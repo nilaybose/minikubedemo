@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_HUB  = credentials('docker_hub')
+        BIN = '/usr/local/bin'
    	}
     stages {  	
         stage('Build') {
@@ -11,14 +12,14 @@ pipeline {
         }
         stage('Docker'){
             steps{
-            	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'           	
-            	sh '/usr/local/bin/docker login -u $DOCKER_HUB_USR -p $DOCKER_HUB_PSW https://index.docker.io/v1/'
-            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'           	
+            	sh '$BIN/docker build -t nilaybose/mkubedemo:latest .'           	
+            	sh '$BIN/docker login -u $DOCKER_HUB_USR -p $DOCKER_HUB_PSW https://index.docker.io/v1/'
+            	sh '$BIN/docker push nilaybose/mkubedemo:latest'           	
            }
         }
         stage('Deploy V1') {
             steps {
-                sh '/usr/local/bin/kubectl create -f ./v1_deploy.yaml --record'
+                sh '$BIN/kubectl create -f ./v1_deploy.yaml --record'
             }
         }
     }
