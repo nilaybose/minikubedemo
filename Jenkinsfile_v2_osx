@@ -23,21 +23,21 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '$BIN/kubectl create -f $DEPLOYMENT_FILE --record'
-                sh 'sleep 2m'
+                sh 'sleep 90'
             }
         }
         stage('TEST') {
             steps {
             	sh 'echo "Test the new service"'
-                sh 'curl http://http://192.168.99.100:30512/app/| grep -i green'
+                sh 'curl http://192.168.99.100:30887 grep -i green'
                 sh 'echo "Testing of the new service Successful"'
             }
         }
         stage('BLUE_TO_GREEN') {
             steps {
-            	sh 'kubectl label svc prod-spboot-service app=spboot-v2 --overwrite'
-            	sh 'kubectl patch svc prod-spboot-service -p \'{"spec":{"selector": {"app": "spboot-v2"}}}\''
-                sh 'kubectl delete deployment spboot-v1'
+            	sh '$BIN/kubectl label svc prod-spboot-service app=spboot-v2 --overwrite'
+            	sh '$BIN/kubectl patch svc prod-spboot-service -p \'{"spec":{"selector": {"app": "spboot-v2"}}}\''
+                sh '$BIN/kubectl delete deployment spboot-v1'
             }
         }
     }
