@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    stages {
-    	environment {
-        	DOCKER_HUB  = credentials('docker_hub')
-    	}
+    environment {
+        DOCKER_HUB  = credentials('docker_hub')
+   	}
+    stages {  	
         stage('Build') {
             steps {
                 sh './gradlew build'
