@@ -9,11 +9,11 @@ pipeline {
         }
         stage('Docker') {
             steps {
-                sh 'export PATH=/usr/local/bin:$PATH'
-                sh 'cd /usr/local/bin'
-            	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'           	
-            	sh '/usr/local/bin/docker login -u nilaybose -p S1mple4ever https://index.docker.io/v1/'
-            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+            	withEnv(["PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]){
+	            	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'           	
+	            	sh '/usr/local/bin/docker login -u nilaybose -p S1mple4ever https://index.docker.io/v1/'
+	            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+	           	}
            }
         }
         stage('Deploy V1') {
