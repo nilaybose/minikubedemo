@@ -9,12 +9,13 @@ pipeline {
         }
         stage('Docker') {
             steps {
-                            sh 'export PATH=/usr/local/bin:$PATH'
             	script {
-                	docker.build "nilaybose/mkubedemo:latest"
-      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
-      					 sh 'docker push nilaybose/mkubedemo:latest'
-      				}
+	            	withEnv(["PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]){
+	                	docker.build "nilaybose/mkubedemo:latest"
+	      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
+	      					 sh 'docker push nilaybose/mkubedemo:latest'
+	      				}
+	      			}
                 }
            }
         }
