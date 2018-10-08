@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Docker') {
             steps {
+                            sh 'export PATH=/usr/local/bin:$PATH'
             	script {
                 	docker.build "nilaybose/mkubedemo:latest"
       				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
