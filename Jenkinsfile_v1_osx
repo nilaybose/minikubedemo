@@ -15,9 +15,11 @@ pipeline {
         stage('Docker') {
             steps {
             	withEnv(["PATH=$PATH"]){
-	            	docker.build "nilaybose/mkubedemo:latest"      	
-	            	sh '/usr/local/bin/docker login -u nilaybose -p ${DOCKER_PWD} https://index.docker.io/v1/'
-	            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+	            	script {
+		            	docker.build "nilaybose/mkubedemo:latest"       	
+		            	sh '/usr/local/bin/docker login -u nilaybose -p S1mple4ever https://index.docker.io/v1/'
+		            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+	            	}
 	           	}
            }
         }
