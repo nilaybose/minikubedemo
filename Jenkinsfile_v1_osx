@@ -1,28 +1,26 @@
 pipeline {
     agent any
     stages {
-   		withEnv(["PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]){
-	        stage('Build') {
-	            steps {
-	                sh 'echo $PWD'
-	                sh './gradlew build'
-	            }
-	        }
-	        stage('Docker') {
-	            steps {
-
-		            	sh 'docker build -t nilaybose/mkubedemo:latest .'           	
-		            	sh '/usr/local/bin/docker login -u nilaybose -p S1mple4ever https://index.docker.io/v1/'
-		            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
-		           	
-	           }
-	        }
-	        stage('Deploy V1') {
-	            steps {
-	                sh 'kubectl create -f ./v1_deploy.yaml --record'
-	            }
-	        }
-	    }
+        stage('Build') {
+            steps {
+                sh 'echo $PWD'
+                sh './gradlew build'
+            }
+        }
+        stage('Docker') {
+            steps {
+            	withEnv(["PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]){
+	            	sh '/usr/local/bin/docker build -t nilaybose/mkubedemo:latest .'           	
+	            	sh '/usr/local/bin/docker login -u nilaybose -p S1mple4ever https://index.docker.io/v1/'
+	            	sh '/usr/local/bin/docker push nilaybose/mkubedemo:latest'
+	           	}
+           }
+        }
+        stage('Deploy V1') {
+            steps {
+                sh '/usr/local/bin/kubectl create -f ./v1_deploy.yaml --record'
+            }
+        }
     }
 }
 
