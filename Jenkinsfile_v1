@@ -12,7 +12,7 @@ pipeline {
             	script {
 	            	withEnv(["PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"]){
 	                	docker.build "nilaybose/mkubedemo:latest"
-	      				withDockerRegistry([ "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin", credentialsId: "gitdocker", url: "" ]) {
+	      				withDockerRegistry([ credentialsId: "gitdocker", url: "" ]) {
 	      					 sh 'docker push nilaybose/mkubedemo:latest'
 	      				}
 	      			}
