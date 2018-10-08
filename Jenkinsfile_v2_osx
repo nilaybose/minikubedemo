@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    environment {
+    	DOCKER_IMAGE    = 'nilaybose/mkubedemo:latest'
+        DOCKER_REG_URL  = 'https://index.docker.io/v1/'
+        DOCKER_REG_CRED =  credentials('docker_hub')
+        BIN             = '/usr/local/bin' 
+        DEPLOYMENT_FILE = './v2_deploy.yaml'             
+   	}
+    stages {  	
+        stage('Build') {
+            steps {
+                sh './gradlew build'
+            }
+        }
+        stage('Docker'){
+            steps{
+            	sh '$BIN/docker build -t $DOCKER_IMAGE .'           	
+            	sh '$BIN/docker login -u $DOCKER_REG_CRED_USR -p $DOCKER_REG_CRED_PSW $DOCKER_REG'
+            	sh '$BIN/docker push     $DOCKER_IMAGE'           	
+           }
+        }
+        stage('Deploy') {
+            steps {
+                sh '$BIN/kubectl create -f $DEPLOYMENT_FILE --record'
+                sh 'sleep 2m'
+            }
+        }
+        stage('TEST') {
+            steps {
+            	sh 'echo "Test the new service"'
+                sh 'curl http://http://192.168.99.100:30512/app/| grep -i green'
+                sh 'echo "Testing of the new service Successful"'
+            }
+        }
+        stage('BLUE_TO_GREEN') {
+            steps {
+            	sh 'kubectl label svc prod-spboot-service app=spboot-v2 --overwrite'
+            	sh 'kubectl patch svc prod-spboot-service -p \'{"spec":{"selector": {"app": "spboot-v2"}}}\''
+                sh 'kubectl delete deployment spboot-v1'
+            }
+        }
+    }
+}
+
+

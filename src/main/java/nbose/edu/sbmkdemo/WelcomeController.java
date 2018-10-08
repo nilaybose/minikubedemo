@@ -33,8 +33,8 @@ class ResponseVO{
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
-	private String color = "blue" ; //blue
-	//private String color = "green" ; //green
+	//private String color = "blue" ; //blue
+	private String color = "green" ; //green
 	
 	public String getDataForLogging() {
 		return "'{\"event\":\"" + "version=" + version + ", hostname=" + hostname + ", color=" + color + ", msg=" + msg + ", traceid=" + traceid +", hostip=" 
