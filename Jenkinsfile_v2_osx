@@ -23,13 +23,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '$BIN/kubectl create -f $DEPLOYMENT_FILE --record'
-                sh 'sleep 90'
+                sh 'sleep 120'
             }
         }
         stage('TEST') {
             steps {
             	sh 'echo "Test the new service"'
-                sh 'curl http://192.168.99.100:30887 grep -i green'
+                sh 'curl http://35.231.228.89/app grep -i green'
                 sh 'echo "Testing of the new service Successful"'
             }
         }
