@@ -33,8 +33,8 @@ class ResponseVO{
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
-	//private String color = "blue" ; //blue
-	private String color = "green" ; //green
+	private String color = "blue" ; //blue
+	//private String color = "green" ; //green
 	
 	public String getDataForLogging() {
 		return "'{\"event\":\"" + "version=" + version + ", hostname=" + hostname + ", color=" + color + ", msg=" + msg + ", traceid=" + traceid +", hostip=" 
@@ -46,7 +46,7 @@ class ResponseVO{
 			Thread.sleep(3000L) ;
 			hostname = InetAddress.getLocalHost().getHostName();
 			hostip   = InetAddress.getLocalHost().getHostAddress();
-			msg = "Greetings " + version + " from Spring Boot Running Inside Docker in Minikube Pod !! [" + LocalDateTime.now() + "]";
+			msg = "Greetings " + version + " from Spring Boot Running Inside Docker in GKE Pod !! [" + LocalDateTime.now() + "]";
 		}
 		catch(Exception _ignore) {
 		}

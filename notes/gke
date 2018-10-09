@@ -1,0 +1,14 @@
+gcloud container clusters create spbootcls --num-nodes 3 --machine-type n1-standard-1
+
+gcloud auth login
+
+NAME       LOCATION    MASTER_VERSION  MASTER_IP       MACHINE_TYPE  NODE_VERSION  NUM_NODES  STATUS
+spbootcls  us-east1-b  1.9.7-gke.6     35.229.126.191  f1-micro      1.9.7-gke.6   3          RUNNING
+Nilays-MacBook-Pro:~ nbose$ kubectl get nodes
+NAME                                       STATUS    ROLES     AGE       VERSION
+gke-spbootcls-default-pool-89369b25-0wb3   Ready     <none>    54s       v1.9.7-gke.6
+gke-spbootcls-default-pool-89369b25-b9b3   Ready     <none>    54s       v1.9.7-gke.6
+gke-spbootcls-default-pool-89369b25-zgdz   Ready     <none>    54s       v1.9.7-gke.6
+
+
+gcloud compute ssh <node-name>
