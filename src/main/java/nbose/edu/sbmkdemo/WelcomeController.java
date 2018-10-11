@@ -29,12 +29,12 @@ public class WelcomeController {
 class ResponseVO{
 	private String traceid = "" + ThreadLocalRandom.current().nextInt(0, 1000000);;
 	private String msg ; 
-	private String version = "(V1)"; 
+	private String version = "(V2)"; 
 	private String hostname ;
 	private String status = "up" ;
 	private String hostip ;
-	private String color = "blue" ; //blue
-	//private String color = "green" ; //green
+	//private String color = "blue" ; //blue
+	private String color = "green" ; //green
 	
 	public String getDataForLogging() {
 		return "'{\"event\":\"" + "version=" + version + ", hostname=" + hostname + ", color=" + color + ", msg=" + msg + ", traceid=" + traceid +", hostip=" 
