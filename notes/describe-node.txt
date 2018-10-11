@@ -1,0 +1,65 @@
+Nilays-MacBook-Pro:~ nbose$ kubectl describe node gke-spbootcls-default-pool-3abca70c-tl48
+Name:               gke-spbootcls-default-pool-3abca70c-tl48
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/fluentd-ds-ready=true
+                    beta.kubernetes.io/instance-type=n1-standard-1
+                    beta.kubernetes.io/os=linux
+                    cloud.google.com/gke-nodepool=default-pool
+                    failure-domain.beta.kubernetes.io/region=us-east1
+                    failure-domain.beta.kubernetes.io/zone=us-east1-b
+                    kubernetes.io/hostname=gke-spbootcls-default-pool-3abca70c-tl48
+Annotations:        node.alpha.kubernetes.io/ttl=0
+                    volumes.kubernetes.io/controller-managed-attach-detach=true
+CreationTimestamp:  Wed, 10 Oct 2018 23:12:28 -0400
+Taints:             <none>
+Unschedulable:      false
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  KernelDeadlock       False   Thu, 11 Oct 2018 00:54:32 -0400   Wed, 10 Oct 2018 23:11:26 -0400   KernelHasNoDeadlock          kernel has no deadlock
+  NetworkUnavailable   False   Wed, 10 Oct 2018 23:12:43 -0400   Wed, 10 Oct 2018 23:12:43 -0400   RouteCreated                 RouteController created a route
+  OutOfDisk            False   Thu, 11 Oct 2018 00:55:11 -0400   Wed, 10 Oct 2018 23:12:28 -0400   KubeletHasSufficientDisk     kubelet has sufficient disk space available
+  MemoryPressure       False   Thu, 11 Oct 2018 00:55:11 -0400   Wed, 10 Oct 2018 23:12:28 -0400   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Thu, 11 Oct 2018 00:55:11 -0400   Wed, 10 Oct 2018 23:12:28 -0400   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  Ready                True    Thu, 11 Oct 2018 00:55:11 -0400   Wed, 10 Oct 2018 23:12:48 -0400   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  10.142.0.3
+  ExternalIP:  35.231.112.231
+  Hostname:    gke-spbootcls-default-pool-3abca70c-tl48
+Capacity:
+ cpu:     1
+ memory:  3794356Ki
+ pods:    110
+Allocatable:
+ cpu:     940m
+ memory:  2708916Ki
+ pods:    110
+System Info:
+ Machine ID:                 8d55babec4ddf5d16685a98c28e10f52
+ System UUID:                8D55BABE-C4DD-F5D1-6685-A98C28E10F52
+ Boot ID:                    3add1381-26e5-4f09-993b-8cc1c87a1108
+ Kernel Version:             4.4.111+
+ OS Image:                   Container-Optimized OS from Google
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://17.3.2
+ Kubelet Version:            v1.9.7-gke.6
+ Kube-Proxy Version:         v1.9.7-gke.6
+PodCIDR:                     10.48.0.0/24
+ExternalID:                  3465764299133354407
+ProviderID:                  gce://kubernetes-tech-talk/us-east1-b/gke-spbootcls-default-pool-3abca70c-tl48
+Non-terminated Pods:         (5 in total)
+  Namespace                  Name                                                   CPU Requests  CPU Limits  Memory Requests  Memory Limits
+  ---------                  ----                                                   ------------  ----------  ---------------  -------------
+  kube-system                fluentd-gcp-v2.0.17-67xs9                              100m (10%)    0 (0%)      200Mi (7%)       300Mi (11%)
+  kube-system                heapster-v1.5.2-79488bff54-7dbhp                       138m (14%)    138m (14%)  301856Ki (11%)   301856Ki (11%)
+  kube-system                kube-dns-5dcfcbf5fb-dcp7b                              260m (27%)    0 (0%)      110Mi (4%)       170Mi (6%)
+  kube-system                kube-proxy-gke-spbootcls-default-pool-3abca70c-tl48    100m (10%)    0 (0%)      0 (0%)           0 (0%)
+  kube-system                l7-default-backend-57856c5f55-ts58c                    10m (1%)      10m (1%)    20Mi (0%)        20Mi (0%)
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  CPU Requests  CPU Limits  Memory Requests  Memory Limits
+  ------------  ----------  ---------------  -------------
+  608m (64%)    148m (15%)  639776Ki (23%)   803616Ki (29%)
+Events:         <none>
