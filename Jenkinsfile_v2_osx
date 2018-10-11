@@ -26,13 +26,6 @@ pipeline {
                 sh 'sleep 90'
             }
         }
-        stage('TEST') {
-            steps {
-            	sh 'echo "Test the new service"'
-                sh 'curl http://35.231.228.89/app | grep -i green'
-                sh 'echo "Testing of the new service Successful"'
-            }
-        }
         stage('BLUE_TO_GREEN') {
             steps {
             	sh '$BIN/kubectl label svc prod-spboot-service app=spboot-v2 --overwrite'
