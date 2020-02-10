@@ -51,3 +51,7 @@ export SPLUNK_HOST_PORT='192.168.0.18:8088'
 cat $1 | grep -i "Greeting" | while read -r LINE; do echo "curl -k  http://${SPLUNK_HOST_PORT}/services/collector/event -H \"Authorization: Splunk b977810d-91ae-42a2-87ab-43bc46ad8d0d\" -d ${LINE}" ;done | sh
 
 tail -5 spboot-v1-cc496d75f-p7lvd_sbms.log | while read -r LINE; do echo "curl -k  http://192.168.0.18:8088/services/collector/event -H \"Authorization: Splunk b977810d-91ae-42a2-87ab-43bc46ad8d0d\" -d ${LINE}" ;done | sh
+
+
+kubectl describe secret default-token-6dfzm
+kubectl proxy
