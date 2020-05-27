@@ -17,8 +17,14 @@ spec:
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
         - name: config-volume
+          mountPath: /etc/nginx/.htpasswd
+          subPath: basic_auth
+        - name: config-volume
           mountPath: /html/404.html
           subPath: 404.html
+        - name: config-volume
+          mountPath: /html/401.html
+          subPath: 401.html
         - name: config-volume
           mountPath: /html/50x.html
           subPath: 50x.html
