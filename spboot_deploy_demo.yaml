@@ -1,23 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spboot-v2
+  name: spboot-demo
 spec:
   replicas: 3
   template: 
     metadata:
       labels:
-        app: spboot-v2
+        app: spboot-demo
     spec:
       containers:
       - name: spboot-container
         image: nilaybose/mkubedemo
-        volumeMounts:
-        - name: sblogs
-          mountPath: /tmp/sblogs
         ports:
         - containerPort: 9080
-      volumes:
-      - name: sblogs
-        hostPath: 
-         path: /tmp/sblogs

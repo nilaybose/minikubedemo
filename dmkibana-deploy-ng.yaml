@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dm-kibana
+spec:
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: dm-kibana
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: config-volume
+          mountPath: /html/404.html
+          subPath: 404.html
+        - name: config-volume
+          mountPath: /html/50x.html
+          subPath: 50x.html
+        ports:
+        - containerPort: 5600
+      - name: kibana
+        image: kibana:5.4.3
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/kibana/kibana.yml
+          subPath: kibana.yml
+        ports:
+        - containerPort: 5601
+      volumes:
+      - name: config-volume
+        configMap:
+          name: dmkibana-config
+

@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dmkibana-service
+  labels:
+    app: dm-kibana
+    env: prod
+spec:
+  type: LoadBalancer
+  selector:
+    app: dm-kibana
+  ports:
+    - port: 5600
+      targetPort: 5600
