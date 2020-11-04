@@ -1,13 +1,16 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dm-kibana
+  name: adf-kibana
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: adf-kibana
   template: 
     metadata:
       labels:
-        app: dm-kibana
+        app: adf-kibana
     spec:
       containers:
       - name: nginx
@@ -30,16 +33,30 @@ spec:
           subPath: 50x.html
         ports:
         - containerPort: 5600
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1G
+          requests:
+            cpu: 500m
+            memory: 256Mi
       - name: kibana
-        image: kibana:5.4.3
+        image: kibana:7.9.3
         volumeMounts:
         - name: config-volume
-          mountPath: /etc/kibana/kibana.yml
+          mountPath: /usr/share/kibana/config/kibana.yml
           subPath: kibana.yml
         ports:
         - containerPort: 5601
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 2G
+          requests:
+            cpu: 500m
+            memory: 1G
       volumes:
       - name: config-volume
         configMap:
-          name: dmkibana-config
+          name: adf-kibana-config
 

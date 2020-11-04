@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: adf-es7-service
+  labels:
+    app: adf-es7
+spec:
+  type: NodePort
+  selector:
+    app: adf-es7
+  ports:
+    - port: 9200
+      targetPort: 9200
+      protocol: TCP
+      nodePort: 30001
