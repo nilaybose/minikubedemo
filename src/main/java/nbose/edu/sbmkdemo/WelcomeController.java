@@ -1,13 +1,20 @@
 package nbose.edu.sbmkdemo;
 
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson ;
@@ -24,6 +31,25 @@ public class WelcomeController {
     	logger.info(resp.getDataForLogging());
         return json ;
     }
+
+	@RequestMapping( value="/sap/**")
+	public ResponseEntity<String>dump(HttpServletRequest request) {
+		String result = "";
+		try {
+			result = IOUtils.toString(request.getInputStream(), StandardCharsets.UTF_8);
+		}
+		catch (Exception ex){
+			result = "Error" ;
+		}
+		System.out.println( "Request Received: " + request.getRemoteHost()
+				+ ", path - " + request.getRequestURI() + ", body - " + result);
+		return new ResponseEntity<>(HttpStatus.OK) ;
+	}
+
+	@RequestMapping( value="/health")
+	public ResponseEntity<String>health(HttpServletRequest request) {
+		return new ResponseEntity<>(HttpStatus.OK) ;
+	}
 }
 
 class ResponseVO{
